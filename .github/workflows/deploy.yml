@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - uses: aws-actions/setup-sam@v2
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - name: SAM BUILD
+        run: sam build --use-container
+      - name: SAM DEPLOY
+        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+      - name: Instal dependencies
+        run: npm ci
+      - name: Build App App
+        run: npm run build
+      - name: Deploy App
+        run: aws s3 cp dist s3://sam-app3-buckets3-i2pdxafwzqhb/ --recursive
