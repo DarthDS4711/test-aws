@@ -19,7 +19,7 @@ jobs:
       - name: SAM BUILD
         run: sam build --use-container
       - name: SAM DEPLOY
-        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+        run: sam deploy -stack-name TEST-STACK
       - name: Instal dependencies
         run: npm ci
       - name: Build App App
