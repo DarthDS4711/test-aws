@@ -16,7 +16,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          role-to-asumme: arn:aws:iam::631534400876:role/aws-sam-cli-managed-dev-pipel-PipelineExecutionRole-psDxVJ33HCNm
+          role-to-assume: arn:aws:iam::631534400876:role/aws-sam-cli-managed-dev-pipel-PipelineExecutionRole-psDxVJ33HCNm
           role-session-name: sam-pipeline
       - name: SAM BUILD
         run: sam build --use-container
